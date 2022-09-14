@@ -4,13 +4,10 @@ const startBtn = document.getElementById("starts");
 const countdownOverlay = document.getElementById("countdown");
 const resultModal = document.getElementById("result");
 const modalBackground = document.getElementById("modal-background");
-// console.log(question.innerText)
 // variables
 let userText = "";
 let errorCount = 0;
-// let startTime = 0;
 let startTime;
-// console.log(startTime)
 let questionText = "";
 
 // Load and display question
@@ -25,9 +22,7 @@ fetch("./texts.json")
 // checks the user typed character and displays accordingly
 const typeController = (e) => {
   const newLetter = e.key;
-  // console.log(newLetter)
-  // console.log(question.innerText)
-  // Handle backspace press
+
   if (newLetter == "Backspace") {
     userText = userText.slice(0, userText.length - 1);
     return display.removeChild(display.lastChild);
@@ -71,7 +66,6 @@ const gameOver = () => {
   document.removeEventListener("keydown", typeController);
   // the current time is the finish time
   // so total time taken is current time - start time
-  // console.log(startTime)
   const finishTime = new Date().getTime();
   const timeTaken = (finishTime - startTime) / 1000;
 
@@ -96,8 +90,7 @@ const gameOver = () => {
 
   // restart everything
   startTime = null;
-  // startTime = 0;
-  // console.log(startTime)
+
   errorCount = 0;
   userText = "";
   display.classList.add("inactive");
@@ -110,13 +103,13 @@ const closeModal = () => {
 
 const start = () => {
   // If already started, do not start again
-  // console.log(startTime)
   if (startTime) return;
 
   let count = 3;
   countdownOverlay.style.display = "flex";
 
   const startCountdown = setInterval(() => {
+    console.log(count)
     countdownOverlay.innerHTML = `<h1>${count}</h1>`;
 
     // finished timer
@@ -128,10 +121,10 @@ const start = () => {
 
       clearInterval(startCountdown);
       startTime = new Date().getTime();
-      // console.log(startTime)
     }
     count--;
   }, 1000);
+  countdownOverlay.textContent = ``;
 };
 
 // START Countdown
@@ -143,8 +136,7 @@ displayHistory();
 // Show typing time spent
 setInterval(() => {
   const currentTime = new Date().getTime();
-  // console.log(currentTime)
-  // console.log(startTime)
+
   const timeSpent = (currentTime - startTime) / 1000;
 
 
