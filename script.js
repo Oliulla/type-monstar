@@ -8,7 +8,9 @@ const modalBackground = document.getElementById("modal-background");
 // variables
 let userText = "";
 let errorCount = 0;
+// let startTime = 0;
 let startTime;
+// console.log(startTime)
 let questionText = "";
 
 // Load and display question
@@ -66,6 +68,7 @@ const gameOver = () => {
   document.removeEventListener("keydown", typeController);
   // the current time is the finish time
   // so total time taken is current time - start time
+  // console.log(startTime)
   const finishTime = new Date().getTime();
   const timeTaken = (finishTime - startTime) / 1000;
 
@@ -89,6 +92,8 @@ const gameOver = () => {
 
   // restart everything
   startTime = null;
+  // startTime = 0;
+  // console.log(startTime)
   errorCount = 0;
   userText = "";
   display.classList.add("inactive");
@@ -101,6 +106,7 @@ const closeModal = () => {
 
 const start = () => {
   // If already started, do not start again
+  // console.log(startTime)
   if (startTime) return;
 
   let count = 3;
@@ -118,6 +124,7 @@ const start = () => {
 
       clearInterval(startCountdown);
       startTime = new Date().getTime();
+      // console.log(startTime)
     }
     count--;
   }, 1000);
@@ -132,8 +139,10 @@ displayHistory();
 // Show typing time spent
 setInterval(() => {
   const currentTime = new Date().getTime();
+  // console.log(currentTime)
+  // console.log(startTime)
   const timeSpent = (currentTime - startTime) / 1000;
 
 
-  document.getElementById("show-time").innerHTML = `${startTime ? timeSpent : 0} seconds`;
+  document.getElementById("show-time").innerText = `${startTime ? parseInt(timeSpent) : 0} seconds`;
 }, 1000);
