@@ -11,7 +11,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
         
         <style>
-            .card p {
+            .card p, pre {
                 color: #15a5af;
             }
         </style>
@@ -51,9 +51,21 @@
                     </div>
                     <div class="card bg-black col-5 mb-4 p-4">
                         <h5>How JavaScript event loop works</h5>
+                        <p>
+                            The Event Loop has one simple job — to monitor the Call Stack and the Callback Queue. 
+                            If the Call Stack is empty, the Event Loop will take the first event from the queue and 
+                            will push it to the Call Stack, which effectively runs it.
+                        </p>
                     </div>
                     <div class="card bg-black col-5 mb-4 p-4">
                         <h5>How many ways we can get undefined in JavaScript</h5>
+                        <p>
+                            <em>Lets see 8 ways to get undefined</em>: (1) Variable that is no initialized will give undefined.
+                            (2) Function with no return. (3) Parameters that is not passed will be undefined. (4) If return
+                            has nothing on the right side. (5) Property that doesn't exists on an object will give undefined.
+                            (6) Accessing array elements outside of the index range. (7) Deleting an element inside an array.
+                            (8) Set a value directly undefined. 
+                        </p>
                     </div>
                     
                 </div>
