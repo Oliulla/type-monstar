@@ -9,6 +9,8 @@ let userText = "";
 let errorCount = 0;
 let startTime;
 let questionText = "";
+let wpm;
+let cpm;
 
 // Load and display question
 fetch("./texts.json")
@@ -38,7 +40,6 @@ const typeController = (e) => {
   }
 
   userText += newLetter;
-
   const newLetterCorrect = validate(newLetter);
 
   if (newLetterCorrect) {
@@ -52,7 +53,15 @@ const typeController = (e) => {
   if (questionText === userText) {
     gameOver();
   }
+
+  // Count word per minutes
+  // speedChecker(userText, newLetter);
 };
+
+// const speedChecker = (userText, newLetter) => {
+//   const userAllWords = userText.split(' ').length;
+//   console.log(userAllWords);
+// }
 
 const validate = (key) => {
   if (key === questionText[userText.length - 1]) {
@@ -67,7 +76,7 @@ const gameOver = () => {
   // the current time is the finish time
   // so total time taken is current time - start time
   const finishTime = new Date().getTime();
-  const timeTaken = (finishTime - startTime) / 1000;
+  const timeTaken = parseInt((finishTime - startTime) / 1000);
 
   // show result modal
   resultModal.innerHTML = "";
@@ -77,16 +86,22 @@ const gameOver = () => {
   display.innerHTML = "";
   // make it inactive
   display.classList.add("inactive");
+
+  // count speed for word per minutes
+  const userAllWords = userText.split(' ').length;
+  console.log(userText.split(''));
+  wpm = parseInt((userAllWords/timeTaken) * 60);
+
   // show result
   resultModal.innerHTML += `
     <h1>Finished!</h1>
     <p>You took: <span class="bold">${timeTaken}</span> seconds</p>
+    <p>WPM: <span class="bold">${wpm}</span></p>
     <p>You made <span class="bold red">${errorCount}</span> mistakes</p>
     <button onclick="closeModal()">Close</button>
   `;
-  // console.log(errorCount)
-
-  addHistory(questionText, timeTaken, errorCount);
+  
+  addHistory(questionText, timeTaken, errorCount, wpm);
 
   // restart everything
   startTime = null;
@@ -109,7 +124,6 @@ const start = () => {
   countdownOverlay.style.display = "flex";
 
   const startCountdown = setInterval(() => {
-    console.log(count)
     countdownOverlay.innerHTML = `<h1>${count}</h1>`;
 
     // finished timer
@@ -137,8 +151,8 @@ displayHistory();
 setInterval(() => {
   const currentTime = new Date().getTime();
 
-  const timeSpent = (currentTime - startTime) / 1000;
+  const timeSpent = parseInt((currentTime - startTime) / 1000);
 
 
-  document.getElementById("show-time").innerText = `${startTime ? parseInt(timeSpent) : 0} seconds`;
+  document.getElementById("show-time").innerText = `${startTime ? (timeSpent) : 0} seconds`;
 }, 1000);

@@ -150,9 +150,10 @@ button {
 .card {
   width: 31%;
   height: 100%;
-  padding: 50px;
+  /* padding: 50px; */
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   padding: 20px 30px;
   color: white;
   border-radius: 15px;
