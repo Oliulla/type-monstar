@@ -87,21 +87,23 @@ const gameOver = () => {
   // make it inactive
   display.classList.add("inactive");
 
-  // count speed for word per minutes
+  // count speed for words per minutes and charecters per minutes
   const userAllWords = userText.split(' ').length;
-  console.log(userText.split(''));
+  const splitAllChar = (userText.split('')).length;
+  cpm = parseInt((splitAllChar/timeTaken) * 60);
   wpm = parseInt((userAllWords/timeTaken) * 60);
 
   // show result
   resultModal.innerHTML += `
     <h1>Finished!</h1>
     <p>You took: <span class="bold">${timeTaken}</span> seconds</p>
+    <p>CPM: <span class="bold">${cpm}</span></p>
     <p>WPM: <span class="bold">${wpm}</span></p>
     <p>You made <span class="bold red">${errorCount}</span> mistakes</p>
     <button onclick="closeModal()">Close</button>
   `;
   
-  addHistory(questionText, timeTaken, errorCount, wpm);
+  addHistory(questionText, timeTaken, errorCount, wpm, cpm);
 
   // restart everything
   startTime = null;
