@@ -137,10 +137,11 @@ const start = () => {
 
       clearInterval(startCountdown);
       startTime = new Date().getTime();
+      
+      countdownOverlay.textContent = ``;
     }
     count--;
   }, 1000);
-  countdownOverlay.textContent = ``;
 };
 
 // START Countdown
