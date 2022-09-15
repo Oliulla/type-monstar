@@ -53,15 +53,7 @@ const typeController = (e) => {
   if (questionText === userText) {
     gameOver();
   }
-
-  // Count word per minutes
-  // speedChecker(userText, newLetter);
 };
-
-// const speedChecker = (userText, newLetter) => {
-//   const userAllWords = userText.split(' ').length;
-//   console.log(userAllWords);
-// }
 
 const validate = (key) => {
   if (key === questionText[userText.length - 1]) {
@@ -137,7 +129,7 @@ const start = () => {
 
       clearInterval(startCountdown);
       startTime = new Date().getTime();
-      
+
       countdownOverlay.textContent = ``;
     }
     count--;
